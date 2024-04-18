@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ~/private/var/lib/postgresql:/var/lib/postgresql
+      - ./src/main/resources/data/sql/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - postgres-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'test@test.com'
+      PGADMIN_DEFAULT_PASSWORD: 'test'
+    ports:
+        - '5050:80'
+    volumes:
+      - ./src/main/resources/data/servers.json:/pgadmin4/servers.json
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
+

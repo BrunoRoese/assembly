@@ -1,0 +1,5 @@
+CREATE TABLE product (
+    id INT PRIMARY KEY NOT NULL,
+    name VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
