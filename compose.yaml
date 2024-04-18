@@ -4,7 +4,7 @@ services:
     image: postgres:latest
     volumes:
       - ~/private/var/lib/postgresql:/var/lib/postgresql
-      - ./src/main/resources/data/sql/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
+      - ./src/main/resources/db/sql/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -21,7 +21,7 @@ services:
     ports:
         - '5050:80'
     volumes:
-      - ./src/main/resources/data/servers.json:/pgadmin4/servers.json
+      - ./src/main/resources/db/servers.json:/pgadmin4/servers.json
     networks:
       - postgres-network
 
