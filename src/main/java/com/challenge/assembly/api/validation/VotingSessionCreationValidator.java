@@ -1,26 +1,27 @@
 package com.challenge.assembly.api.validation;
 
+import com.challenge.assembly.api.dto.VotingSessionRequest;
 import com.challenge.assembly.api.exception.BadRequestException;
-import com.challenge.assembly.api.exception.ConflictException;
-import com.challenge.assembly.api.service.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.challenge.assembly.api.utils.UuidUtils.convertUuid;
+import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
 public class VotingSessionCreationValidator {
 
-    private final IssueService issueService;
-
-    public void validateIssueId(String issueId) {
+    public void validateIssueId(String issueId, VotingSessionRequest votingSessionRequest) {
         if (issueId == null || issueId.isBlank()) {
             throw new BadRequestException("Issue ID is required");
         }
 
-        if (issueService.getIssueById(convertUuid(issueId)).isEmpty()) {
-            throw new ConflictException("Issue not found");
+        if (votingSessionRequest.expirationTime() == null) {
+            return;
+        }
+
+        if (votingSessionRequest.expirationTime().before(new Date())) {
+            throw new BadRequestException("Expiration time must be in the future");
         }
     }
 }
