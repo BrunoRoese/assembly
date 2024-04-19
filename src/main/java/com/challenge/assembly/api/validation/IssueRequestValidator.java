@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 public class IssueRequestValidator {
 
     public void validateIssueRequest(IssueRequest issueRequest) {
+        if (issueRequest.title() == null) {
+            throw new BadRequestException("Title is required");
+        }
+
         if (issueRequest.title().isBlank()) {
             throw new BadRequestException("Title is required");
         }

@@ -6,7 +6,7 @@ import com.challenge.assembly.api.validation.IssueRequestValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -22,7 +22,7 @@ public class IssueRequestValidatorTest {
     private IssueRequestValidator issueRequestValidator;
 
     @ParameterizedTest
-    @EmptySource
+    @NullAndEmptySource
     void shouldThrowBadRequestExceptionWhenTitleIsBlank(String title) {
         var issueRequest = mock(IssueRequest.class);
 
