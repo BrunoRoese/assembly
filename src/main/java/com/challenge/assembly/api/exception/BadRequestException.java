@@ -1,4 +1,4 @@
-package com.challenge.assembly.api.exceptions;
+package com.challenge.assembly.api.exception;
 
 
 public class BadRequestException extends RuntimeException {
