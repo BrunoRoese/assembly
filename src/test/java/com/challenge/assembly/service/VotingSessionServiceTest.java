@@ -2,6 +2,7 @@ package com.challenge.assembly.service;
 
 import com.challenge.assembly.api.domain.VotingSession;
 import com.challenge.assembly.api.repository.VotingSessionPageRepository;
+import com.challenge.assembly.api.repository.VotingSessionRepository;
 import com.challenge.assembly.api.service.VotingSessionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +23,8 @@ public class VotingSessionServiceTest {
 
     @Mock
     private VotingSessionPageRepository votingSessionPageRepository;
+    @Mock
+    private VotingSessionRepository votingSessionRepository;
 
     @InjectMocks
     private VotingSessionService votingSessionService;
@@ -39,5 +42,17 @@ public class VotingSessionServiceTest {
 
         verify(votingSessionPageRepository).findAll(pageRequest);
         assertThat(response).isEqualTo(votingSessionPage);
+    }
+
+    @Test
+    void shouldSaveVotingSession() {
+        var votingSession = new VotingSession();
+
+        given(votingSessionRepository.save(votingSession)).willReturn(votingSession);
+
+        var response = votingSessionService.saveVotingSession(votingSession);
+
+        verify(votingSessionRepository).save(votingSession);
+        assertThat(response).isEqualTo(votingSession);
     }
 }
