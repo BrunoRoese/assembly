@@ -9,7 +9,7 @@ public class IssueAdapter {
     public Issue toDomain(IssueRequest issueRequest) {
         var issue = new Issue();
 
-        issue.setTitle(issueRequest.getTitle());
+        issue.setTitle(issueRequest.title());
 
         return issue;
     }

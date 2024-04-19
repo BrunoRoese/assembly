@@ -26,7 +26,7 @@ public class IssueRequestValidatorTest {
     void shouldThrowBadRequestExceptionWhenTitleIsBlank(String title) {
         var issueRequest = mock(IssueRequest.class);
 
-        given(issueRequest.getTitle()).willReturn(title);
+        given(issueRequest.title()).willReturn(title);
 
         assertThrows(BadRequestException.class, () -> issueRequestValidator.validateIssueRequest(issueRequest));
     }
@@ -35,7 +35,7 @@ public class IssueRequestValidatorTest {
     void shouldNotThrowExceptionWhenTitleExists() {
         var issueRequest = mock(IssueRequest.class);
 
-        given(issueRequest.getTitle()).willReturn("Title");
+        given(issueRequest.title()).willReturn("Title");
 
         assertDoesNotThrow(() -> issueRequestValidator.validateIssueRequest(issueRequest));
     }

@@ -21,7 +21,7 @@ public class IssueAdapterTest {
     void shouldCreateDomain() {
         var issueRequest = mock(IssueRequest.class);
 
-        given(issueRequest.getTitle()).willReturn("Title");
+        given(issueRequest.title()).willReturn("Title");
 
         var response = issueAdapter.toDomain(issueRequest);
 
