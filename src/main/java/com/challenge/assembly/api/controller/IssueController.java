@@ -7,6 +7,7 @@ import com.challenge.assembly.api.service.IssueService;
 import com.challenge.assembly.api.validation.IssueRequestValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class IssueController {
         return issueService.getIssues(page, size);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Issue createIssue(@RequestBody IssueRequest issueRequest) {
         issueRequestValidator.validateIssueRequest(issueRequest);
