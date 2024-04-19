@@ -1,6 +1,7 @@
 package com.challenge.assembly.api.service;
 
 import com.challenge.assembly.api.domain.Vote;
+import com.challenge.assembly.api.domain.VotingSession;
 import com.challenge.assembly.api.repository.VotePageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ public class VoteService {
 
     private final VotePageRepository votePageRepository;
 
-    public Page<Vote> getVotesForSession(UUID votingSessionId, PageRequest pageRequest) {
-        return votePageRepository.getVoteByVotingSessionId(votingSessionId, pageRequest);
+    public Page<Vote> getVotesForSession(VotingSession votingSession, PageRequest pageRequest) {
+        return votePageRepository.getVoteByVotingSession(votingSession, pageRequest);
     }
 }

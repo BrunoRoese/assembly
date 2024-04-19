@@ -1,6 +1,7 @@
 package com.challenge.assembly.api.repository;
 
 import com.challenge.assembly.api.domain.Vote;
+import com.challenge.assembly.api.domain.VotingSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,5 @@ import java.util.UUID;
 public interface VotePageRepository extends PagingAndSortingRepository<Vote, UUID> {
 
     @Query
-    public Page<Vote> getVoteByVotingSessionId(UUID votingSessionId, PageRequest page);
+    public Page<Vote> getVoteByVotingSession(VotingSession votingSession, PageRequest page);
 }
