@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import static com.challenge.assembly.api.utils.UuidUtils.convertUuid;
+import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
 
 @RestController
 @RequestMapping("api/v1/voting-sessions")
@@ -36,7 +36,7 @@ public class VotingSessionController {
             @RequestBody VotingSessionRequest votingSessionRequest) {
         votingSessionCreationValidator.validateIssueId(issueId, votingSessionRequest);
 
-        var issue = issueService.getIssueById(convertUuid(issueId));
+        var issue = issueService.getIssueById(mapStringToUuid(issueId));
 
         var expirationTime = expirationTimeService.calculateExpirationTime(votingSessionRequest.expirationTime());
 

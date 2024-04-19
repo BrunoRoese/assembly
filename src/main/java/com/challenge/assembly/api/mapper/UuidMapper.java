@@ -1,12 +1,12 @@
-package com.challenge.assembly.api.utils;
+package com.challenge.assembly.api.mapper;
 
 import com.challenge.assembly.api.exception.ConflictException;
 
 import java.util.UUID;
 
-public class UuidUtils {
+public class UuidMapper {
 
-    public static UUID convertUuid(String uuid) {
+    public static UUID mapStringToUuid(String uuid) {
         try {
             return UUID.fromString(uuid);
         } catch (IllegalArgumentException e) {

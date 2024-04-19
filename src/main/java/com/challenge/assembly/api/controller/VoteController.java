@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
-import static com.challenge.assembly.api.utils.UuidUtils.convertUuid;
+import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
 
 @RestController
 @RequestMapping("api/v1/votes")
@@ -28,6 +26,6 @@ public class VoteController {
             @RequestParam(defaultValue = "10") int size) {
         var pageRequest = PageRequest.of(page, size);
 
-        return voteService.getVotesForSession(convertUuid(votingSessionId), pageRequest);
+        return voteService.getVotesForSession(mapStringToUuid(votingSessionId), pageRequest);
     }
 }
