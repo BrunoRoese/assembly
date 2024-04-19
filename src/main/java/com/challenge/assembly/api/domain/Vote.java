@@ -12,6 +12,8 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private int userId;
+    @Enumerated(EnumType.STRING)
+    private VoteStatus status;
     @ManyToOne
     @JoinColumn(name = "voting_session_id")
     private VotingSession votingSession;
