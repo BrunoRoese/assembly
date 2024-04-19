@@ -4,6 +4,7 @@
 This project is a simple assembly project where users will be able to vote for an assembly and start a new one.   
 
 This project is powered by:
+- [Java](https://www.java.com/)
 - [PostgresSQL](https://www.postgresql.org/)
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Docker](https://www.docker.com/)
@@ -37,7 +38,7 @@ Please, note that removing the -d flag, the container will start and log everyth
 
 After running the docker compose file, you can run the project using the following command:
 ```
-$ ./gradlew bootRun
+$ SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
 ```
 
 #### Using pgAdmin
