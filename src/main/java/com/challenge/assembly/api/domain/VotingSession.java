@@ -2,6 +2,7 @@ package com.challenge.assembly.api.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.UUID;
@@ -17,4 +18,6 @@ public class VotingSession {
     @JoinColumn(name = "issue_id")
     private Issue issue;
     private Date expirationTime;
+    @CreationTimestamp
+    private Date creationTime;
 }
