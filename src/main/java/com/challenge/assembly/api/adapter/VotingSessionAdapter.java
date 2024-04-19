@@ -1,8 +1,11 @@
 package com.challenge.assembly.api.adapter;
 
+import com.challenge.assembly.api.domain.Issue;
 import com.challenge.assembly.api.domain.VotingSession;
 import com.challenge.assembly.api.dto.VotingSessionResponse;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class VotingSessionAdapter {
@@ -14,5 +17,14 @@ public class VotingSessionAdapter {
             votingSession.getCreationTime(),
             votingSession.getExpirationTime()
         );
+    }
+
+    public VotingSession toDomain(Issue issue, Date expirationTime) {
+        var votingSession = new VotingSession();
+
+        votingSession.setIssue(issue);
+        votingSession.setExpirationTime(expirationTime);
+
+        return votingSession;
     }
 }

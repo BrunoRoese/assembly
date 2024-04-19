@@ -42,4 +42,15 @@ public class VotingSessionAdapterTest {
         assertThat(response.start()).isEqualTo(now);
         assertThat(response.end()).isEqualTo(now);
     }
+
+    @Test
+    void shouldConvertToDomain() {
+        var issue = mock(Issue.class);
+        var expirationTime = new Date();
+
+        var votingSession = votingSessionAdapter.toDomain(issue, expirationTime);
+
+        assertThat(votingSession.getIssue()).isEqualTo(issue);
+        assertThat(votingSession.getExpirationTime()).isEqualTo(expirationTime);
+    }
 }
