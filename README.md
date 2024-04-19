@@ -41,6 +41,13 @@ After running the docker compose file, you can run the project using the followi
 $ SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
 ```
 
+### Testing
+This project uses JUnit 5 for testing. You can run the tests using the following command:
+```
+$ ./gradlew cleanTest test
+```
+This is configured to display the test results on the terminal as 'passed', 'failed' or 'skipped'.
+
 #### Using pgAdmin
 After running the docker compose file, a container for the pgAdmin will be created. You can easily access it through the localhost:5050.
 pgAdmin default credentials are:
