@@ -42,6 +42,12 @@ dependencyManagement {
 	}
 }
 
+test {
+	testLogging {
+		events "failed", "passed", "skipped"
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
