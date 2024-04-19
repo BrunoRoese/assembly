@@ -3,8 +3,7 @@ services:
   postgres:
     image: postgres:latest
     volumes:
-      - ~/private/var/lib/postgresql:/var/lib/postgresql
-      - ./src/main/resources/db/sql/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
+      - ./src/main/resources/db/sql/init-data.sql:/docker-entrypoint-initdb.d/init-data.sql
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
