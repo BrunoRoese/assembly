@@ -1,2 +1,6 @@
-package com.challenge.assembly.api.dto;public class VotingSessionRequest {
+package com.challenge.assembly.api.dto;
+
+import java.util.Date;
+
+public record VotingSessionRequest(Date expirationTime) {
 }
