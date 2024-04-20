@@ -1,9 +1,11 @@
 package com.challenge.assembly.service;
 
 import com.challenge.assembly.api.domain.VotingSession;
+import com.challenge.assembly.api.exception.BadRequestException;
 import com.challenge.assembly.api.repository.VotingSessionPageRepository;
 import com.challenge.assembly.api.repository.VotingSessionRepository;
 import com.challenge.assembly.api.service.VotingSessionService;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,9 +15,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,5 +60,28 @@ public class VotingSessionServiceTest {
 
         verify(votingSessionRepository).save(votingSession);
         assertThat(response).isEqualTo(votingSession);
+    }
+
+    @Nested
+    class GetVotingSessionById {
+        private final UUID votingSessionId = UUID.randomUUID();
+
+        @Test
+        void shouldThrowBadRequestIfVotingSessionDoesntExist() {
+            given(votingSessionRepository.findById(votingSessionId)).willReturn(Optional.empty());
+
+            assertThrows(BadRequestException.class, () -> votingSessionService.getVotingSessionById(votingSessionId));
+        }
+
+        @Test
+        void shouldReturnVotingSessionIfIdExists() {
+            var votingSession = mock(VotingSession.class);
+
+            given(votingSessionRepository.findById(votingSessionId)).willReturn(Optional.of(votingSession));
+
+            var response = votingSessionService.getVotingSessionById(votingSessionId);
+
+            assertThat(response).isEqualTo(votingSession);
+        }
     }
 }
