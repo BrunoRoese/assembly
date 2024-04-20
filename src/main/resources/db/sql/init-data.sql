@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS voting_session (
 
 CREATE TABLE IF NOT EXISTS vote (
     id UUID,
-    user_id INTEGER NOT NULL,
+    user_id UUID NOT NULL,
     vote_status vote_status NOT NULL,
     voting_session_id UUID,
     PRIMARY KEY (id),
@@ -33,6 +33,6 @@ INSERT INTO voting_session (id, expiration_time, creation_time, issue_id) VALUES
 INSERT INTO voting_session (id, expiration_time, creation_time, issue_id) VALUES (gen_random_uuid(), '2024-05-02 12:00:00', now(), (SELECT id FROM issue WHERE title = 'Issue 2'));
 INSERT INTO voting_session (id, expiration_time, creation_time, issue_id) VALUES (gen_random_uuid(), '2024-05-03 12:00:00', now(), (SELECT id FROM issue WHERE title = 'Issue 3'));
 
-INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), 1, 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 1'))));
-INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), 2, 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 1'))));
-INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), 3, 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 2'))));
+INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), gen_random_uuid(), 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 1'))));
+INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), gen_random_uuid(), 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 1'))));
+INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), gen_random_uuid(), 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 2'))));

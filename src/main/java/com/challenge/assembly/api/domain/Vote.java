@@ -13,7 +13,7 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private int userId;
+    private UUID userId;
     @Column(name = "vote_status")
     @Convert(converter = VoteStatusConverter.class)
     private VoteStatus status;
