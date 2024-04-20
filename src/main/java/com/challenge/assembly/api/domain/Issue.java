@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,5 +18,5 @@ public class Issue {
     private UUID id;
     private String title;
     @CreationTimestamp
-    private Date creationTime;
+    private LocalDate creationTime;
 }
