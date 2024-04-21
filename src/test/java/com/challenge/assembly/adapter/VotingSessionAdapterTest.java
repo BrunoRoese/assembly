@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class VotingSessionAdapterTest {
         var uuid = UUID.randomUUID();
         var issueUuid = UUID.randomUUID();
         var issue = mock(Issue.class);
-        var now = new Date();
+        var now = LocalDateTime.now();
 
         given(votingSession.getId()).willReturn(uuid);
         given(votingSession.getIssue()).willReturn(issue);
@@ -46,7 +47,7 @@ public class VotingSessionAdapterTest {
     @Test
     void shouldConvertToDomain() {
         var issue = mock(Issue.class);
-        var expirationTime = new Date();
+        var expirationTime = LocalDateTime.now();
 
         var votingSession = votingSessionAdapter.toDomain(issue, expirationTime);
 

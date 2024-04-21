@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -39,7 +41,7 @@ public class VotingSessionCreationValidatorTest {
         void shouldThrowBadRequestOnExpirationTimeBeforeCurrentDate() {
             var issueId = "123e4567-e89b-12d3-a456-426614174000";
             var votingSessionRequest = mock(VotingSessionRequest.class);
-            var yesterday = DateUtils.addDays(new Date(), -1);
+            var yesterday = LocalDateTime.now().minusDays(1);
 
             given(votingSessionRequest.expirationTime()).willReturn(yesterday);
 
@@ -53,7 +55,7 @@ public class VotingSessionCreationValidatorTest {
         void shouldNotThrowExceptionOnValidIssueId() {
             var issueId = "123e4567-e89b-12d3-a456-426614174000";
             var votingSessionRequest = mock(VotingSessionRequest.class);
-            var tomorrow = DateUtils.addDays(new Date(), 1);
+            var tomorrow = LocalDateTime.now().plusDays(1);
 
             given(votingSessionRequest.expirationTime()).willReturn(tomorrow);
 

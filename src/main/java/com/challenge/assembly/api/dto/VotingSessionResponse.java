@@ -1,7 +1,7 @@
 package com.challenge.assembly.api.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record VotingSessionResponse(UUID id, UUID issueId, Date start, Date end) {
+public record VotingSessionResponse(UUID id, UUID issueId, LocalDateTime start, LocalDateTime end) {
 }

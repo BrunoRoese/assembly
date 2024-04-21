@@ -5,7 +5,7 @@ import com.challenge.assembly.api.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class VotingSessionCreationValidator {
             return;
         }
 
-        if (votingSessionRequest.expirationTime().before(new Date())) {
+        if (votingSessionRequest.expirationTime().isBefore(LocalDateTime.now())) {
             throw new BadRequestException("Expiration time must be in the future");
         }
     }

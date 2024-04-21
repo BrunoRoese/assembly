@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,7 +19,7 @@ public class VotingSession {
     @ManyToOne
     @JoinColumn(name = "issue_id")
     private Issue issue;
-    private Date expirationTime;
+    private LocalDateTime expirationTime;
     @CreationTimestamp
-    private Date creationTime;
+    private LocalDateTime creationTime;
 }

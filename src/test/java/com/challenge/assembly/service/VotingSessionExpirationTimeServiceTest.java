@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -26,7 +28,7 @@ public class VotingSessionExpirationTimeServiceTest {
 
     @Test
     void shouldReturnExpirationTime() {
-        var expirationTime = new Date();
+        var expirationTime = LocalDateTime.now();
 
         var response = votingSessionExpirationTimeService.calculateExpirationTime(expirationTime);
 
