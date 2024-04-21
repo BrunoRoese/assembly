@@ -20,4 +20,12 @@ public class Vote {
     @ManyToOne
     @JoinColumn(name = "voting_session_id")
     private VotingSession votingSession;
+
+    public Vote(UUID userId, VoteStatus status, VotingSession votingSession) {
+        this.userId = userId;
+        this.status = status;
+        this.votingSession = votingSession;
+    }
+
+    public Vote() {}
 }
