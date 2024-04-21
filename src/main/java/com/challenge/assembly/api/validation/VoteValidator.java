@@ -31,11 +31,5 @@ public class VoteValidator {
         if (voteRequest.userId() == null || voteRequest.userId().isEmpty()) {
             throw new BadRequestException("User ID cannot be null or empty");
         }
-
-        try {
-            mapStringToUuid(voteRequest.userId());
-        } catch (ConflictException e) {
-            throw new BadRequestException("Invalid user ID");
-        }
     }
 }
