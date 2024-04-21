@@ -2,6 +2,7 @@ package com.challenge.assembly.service;
 
 import com.challenge.assembly.api.domain.VotingSession;
 import com.challenge.assembly.api.exception.BadRequestException;
+import com.challenge.assembly.api.exception.NotFoundException;
 import com.challenge.assembly.api.repository.VotingSessionPageRepository;
 import com.challenge.assembly.api.repository.VotingSessionRepository;
 import com.challenge.assembly.api.service.VotingSessionService;
@@ -70,7 +71,7 @@ public class VotingSessionServiceTest {
         void shouldThrowBadRequestIfVotingSessionDoesntExist() {
             given(votingSessionRepository.findById(votingSessionId)).willReturn(Optional.empty());
 
-            assertThrows(BadRequestException.class, () -> votingSessionService.getVotingSessionById(votingSessionId));
+            assertThrows(NotFoundException.class, () -> votingSessionService.getVotingSessionById(votingSessionId));
         }
 
         @Test
