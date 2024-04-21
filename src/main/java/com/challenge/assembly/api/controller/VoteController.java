@@ -5,7 +5,6 @@ import com.challenge.assembly.api.dto.VoteRequest;
 import com.challenge.assembly.api.dto.VoteResponse;
 import com.challenge.assembly.api.exception.BadRequestException;
 import com.challenge.assembly.api.exception.ConflictException;
-import com.challenge.assembly.api.exception.NotFoundException;
 import com.challenge.assembly.api.service.VoteService;
 import com.challenge.assembly.api.service.VotingSessionService;
 import com.challenge.assembly.api.validation.VoteValidator;
@@ -46,22 +45,22 @@ public class VoteController {
         }
     }
 
-//    @PostMapping
-//    public VoteResponse vote(@RequestBody VoteRequest voteRequest) {
-//        voteValidator.validateVoteRequest(voteRequest);
-//
-//        try {
-//            var voteResponseUuid = mapStringToUuid(voteRequest.votingSessionId());
-//
-//            votingSessionService.getVotingSessionById()
-//        } catch (ConflictException e) {
-//            throw new BadRequestException("Invalid UUID");
-//        }
-//
-//        var votingSession = votingSessionService.getVotingSessionById(mapStringToUuid(voteRequest.votingSessionId()));
-//
-//        var vote = voteAdapter.toEntity(voteResponse);
-//
-//        return voteAdapter.toResponse(voteService.vote(vote));
-//    }
+    @PostMapping
+    public VoteResponse vote(@RequestBody VoteRequest voteRequest) {
+        voteValidator.validateVoteRequest(voteRequest);
+
+        try {
+            var voteResponseUuid = mapStringToUuid(voteRequest.votingSessionId());
+
+            var votingSession = votingSessionService.getVotingSessionById(voteResponseUuid);
+
+            var voteDomain = voteAdapter.toDomain(voteRequest, votingSession);
+
+            var savedVote = voteService.saveVote(voteDomain);
+
+            return voteAdapter.toResponse(savedVote);
+        } catch (ConflictException e) {
+            throw new BadRequestException("Invalid voting session UUID");
+        }
+    }
 }
