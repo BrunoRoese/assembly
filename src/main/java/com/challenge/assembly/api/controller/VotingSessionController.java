@@ -3,6 +3,7 @@ package com.challenge.assembly.api.controller;
 import com.challenge.assembly.api.adapter.VotingSessionAdapter;
 import com.challenge.assembly.api.dto.VotingSessionRequest;
 import com.challenge.assembly.api.dto.VotingSessionResponse;
+import com.challenge.assembly.api.dto.VotingSessionResultResponse;
 import com.challenge.assembly.api.service.IssueService;
 import com.challenge.assembly.api.service.VotingSessionExpirationTimeService;
 import com.challenge.assembly.api.service.VotingSessionService;
