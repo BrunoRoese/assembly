@@ -2,7 +2,6 @@ package com.challenge.assembly.api.service;
 
 import com.challenge.assembly.api.domain.VotingSession;
 import com.challenge.assembly.api.exception.ConflictException;
-import com.challenge.assembly.api.exception.NotFoundException;
 import com.challenge.assembly.api.repository.VotingSessionPageRepository;
 import com.challenge.assembly.api.repository.VotingSessionRepository;
 import lombok.RequiredArgsConstructor;

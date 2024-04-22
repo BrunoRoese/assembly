@@ -1,9 +1,7 @@
 package com.challenge.assembly.service;
 
 import com.challenge.assembly.api.domain.VotingSession;
-import com.challenge.assembly.api.exception.BadRequestException;
 import com.challenge.assembly.api.exception.ConflictException;
-import com.challenge.assembly.api.exception.NotFoundException;
 import com.challenge.assembly.api.repository.VotingSessionPageRepository;
 import com.challenge.assembly.api.repository.VotingSessionRepository;
 import com.challenge.assembly.api.service.VotingSessionService;
@@ -16,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -84,6 +83,31 @@ public class VotingSessionServiceTest {
             var response = votingSessionService.getVotingSessionById(votingSessionId);
 
             assertThat(response).isEqualTo(votingSession);
+        }
+    }
+
+    @Nested
+    class IsVotingSessionActive {
+        @Test
+        void shouldReturnTrueIfVotingSessionIsNotExpired() {
+            var votingSession = mock(VotingSession.class);
+
+            given(votingSession.getExpirationTime()).willReturn(LocalDateTime.now().plusHours(1));
+
+            var response = votingSessionService.isVotingSessionActive(votingSession);
+
+            assertThat(response).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseIfVotingSessionIsExpired() {
+            var votingSession = mock(VotingSession.class);
+
+            given(votingSession.getExpirationTime()).willReturn(LocalDateTime.now().minusHours(1));
+
+            var response = votingSessionService.isVotingSessionActive(votingSession);
+
+            assertThat(response).isFalse();
         }
     }
 }
