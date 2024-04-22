@@ -8,6 +8,7 @@ import com.challenge.assembly.api.exception.ConflictException;
 import com.challenge.assembly.api.service.VoteService;
 import com.challenge.assembly.api.service.VotingSessionService;
 import com.challenge.assembly.api.validation.VoteValidator;
+import com.challenge.assembly.api.validation.VotingSessionExpirationValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ public class VoteController {
     private final VotingSessionService votingSessionService;
     private final VoteValidator voteValidator;
     private final VoteAdapter voteAdapter;
+    private final VotingSessionExpirationValidator votingSessionExpirationValidator;
 
     @GetMapping
     public Page<VoteResponse> getVotesBySession(
@@ -49,18 +51,14 @@ public class VoteController {
     public VoteResponse vote(@RequestBody VoteRequest voteRequest) {
         voteValidator.validateVoteRequest(voteRequest);
 
-        try {
-            var voteResponseUuid = mapStringToUuid(voteRequest.votingSessionId());
+        var votingSession = votingSessionService.getVotingSessionByStringId(voteRequest.votingSessionId());
 
-            var votingSession = votingSessionService.getVotingSessionById(voteResponseUuid);
+        votingSessionExpirationValidator.validateExpiration(votingSession);
 
-            var voteDomain = voteAdapter.toDomain(voteRequest, votingSession);
+        var voteDomain = voteAdapter.toDomain(voteRequest, votingSession);
 
-            var savedVote = voteService.saveVote(voteDomain);
+        var savedVote = voteService.saveVote(voteDomain);
 
-            return voteAdapter.toResponse(savedVote);
-        } catch (ConflictException e) {
-            throw new BadRequestException("Invalid voting session UUID");
-        }
+        return voteAdapter.toResponse(savedVote);
     }
 }
