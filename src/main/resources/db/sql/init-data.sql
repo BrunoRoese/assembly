@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS vote (
 );
 
 CREATE INDEX idx_user_id_voting_session_id ON vote(user_id, voting_session_id);
+CREATE INDEX idx_voting_session_id ON vote(voting_session_id);
 
 INSERT INTO issue (id, title, creation_time) VALUES (gen_random_uuid(), 'Issue 1', now());
 INSERT INTO issue (id, title, creation_time) VALUES (gen_random_uuid(), 'Issue 2', now());
