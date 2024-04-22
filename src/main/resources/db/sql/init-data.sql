@@ -41,3 +41,5 @@ INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_rando
 INSERT INTO vote (id, user_id, vote_status, voting_session_id) VALUES (gen_random_uuid(), gen_random_uuid(), 'yes', (SELECT id FROM voting_session WHERE id = (SELECT id FROM voting_session WHERE issue_id = (SELECT id FROM issue WHERE title = 'Issue 2'))));
 
 CREATE CAST (CHARACTER VARYING as vote_status) WITH INOUT AS IMPLICIT;
+CREATE CAST (vote_status AS text) WITH INOUT AS IMPLICIT;
+
