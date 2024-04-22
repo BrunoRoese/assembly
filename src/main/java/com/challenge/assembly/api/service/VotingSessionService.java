@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
+
 @Service
 @RequiredArgsConstructor
 public class VotingSessionService {
@@ -32,5 +34,11 @@ public class VotingSessionService {
     public VotingSession getVotingSessionById(UUID votingSessionId) {
         return votingSessionRepository.findById(votingSessionId)
                 .orElseThrow(() -> new ConflictException("Voting session not found"));
+    }
+
+    public VotingSession getVotingSessionByStringId(String votingSessionId) {
+        var votingSessionUuid = mapStringToUuid(votingSessionId, "Invalid voting session UUID");
+
+        return getVotingSessionById(votingSessionUuid);
     }
 }
