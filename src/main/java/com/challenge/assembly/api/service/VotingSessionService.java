@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
@@ -40,5 +41,9 @@ public class VotingSessionService {
         var votingSessionUuid = mapStringToUuid(votingSessionId, "Invalid voting session UUID");
 
         return getVotingSessionById(votingSessionUuid);
+    }
+
+    public boolean isVotingSessionActive(VotingSession votingSession) {
+        return votingSession.getExpirationTime().isAfter(LocalDateTime.now());
     }
 }
