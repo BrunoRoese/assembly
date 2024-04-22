@@ -13,4 +13,12 @@ public class UuidMapper {
             throw new ConflictException("Invalid UUID");
         }
     }
+
+    public static UUID mapStringToUuid(String uuid, String message) {
+        try {
+            return UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+            throw new ConflictException(message);
+        }
+    }
 }
