@@ -1,11 +1,12 @@
 package com.challenge.assembly.api.client;
 
+import com.challenge.assembly.api.configuration.CpfValidatorConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "cpf-validator", url = "${cpf.validator.url}")
+@FeignClient(name = "cpf-validator", url = "${cpf.validator.url}", configuration = CpfValidatorConfiguration.class)
 public interface CpfValidatorClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{cpf}")
