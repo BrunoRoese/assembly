@@ -4,9 +4,9 @@ import com.challenge.assembly.api.adapter.VoteAdapter;
 import com.challenge.assembly.api.dto.VoteRequest;
 import com.challenge.assembly.api.dto.VoteResponse;
 import com.challenge.assembly.api.exception.BadRequestException;
-import com.challenge.assembly.api.exception.ConflictException;
 import com.challenge.assembly.api.service.VoteService;
 import com.challenge.assembly.api.service.VotingSessionService;
+import com.challenge.assembly.api.validation.UserVoteValidator;
 import com.challenge.assembly.api.validation.VoteValidator;
 import com.challenge.assembly.api.validation.VotingSessionExpirationValidator;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +26,7 @@ public class VoteController {
     private final VoteValidator voteValidator;
     private final VoteAdapter voteAdapter;
     private final VotingSessionExpirationValidator votingSessionExpirationValidator;
+    private final UserVoteValidator userVoteValidator;
 
     @GetMapping
     public Page<VoteResponse> getVotesBySession(
@@ -56,6 +57,10 @@ public class VoteController {
         votingSessionExpirationValidator.validateExpiration(votingSession);
 
         var voteDomain = voteAdapter.toDomain(voteRequest, votingSession);
+
+        var optionalVote = voteService.getVoteByVotingSessionAndUserId(voteDomain);
+
+        userVoteValidator.validateUserVote(optionalVote);
 
         var savedVote = voteService.saveVote(voteDomain);
 
