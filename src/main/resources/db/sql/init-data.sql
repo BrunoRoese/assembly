@@ -25,6 +25,8 @@ CREATE TABLE IF NOT EXISTS vote (
     CONSTRAINT fk_voting_session FOREIGN KEY(voting_session_id) REFERENCES voting_session(id)
 );
 
+CREATE INDEX idx_user_id_voting_session_id ON vote(user_id, voting_session_id);
+
 INSERT INTO issue (id, title, creation_time) VALUES (gen_random_uuid(), 'Issue 1', now());
 INSERT INTO issue (id, title, creation_time) VALUES (gen_random_uuid(), 'Issue 2', now());
 INSERT INTO issue (id, title, creation_time) VALUES (gen_random_uuid(), 'Issue 3', now());
