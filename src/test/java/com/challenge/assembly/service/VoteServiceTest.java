@@ -14,6 +14,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -56,5 +58,19 @@ public class VoteServiceTest {
 
         verify(voteRepository).save(vote);
         assertThat(response).isEqualTo(savedVote);
+    }
+
+    @Test
+    void shouldGetOptionalVote() {;
+        var optionalVote = mock(Vote.class);
+        var votingSession = mock(VotingSession.class);
+        var userId = UUID.randomUUID();
+
+        given(voteRepository.findByVotingSessionAndUserId(votingSession, userId)).willReturn(Optional.of(optionalVote));
+
+        var response = voteService.getVoteByVotingSessionAndUserId(votingSession, userId);
+
+        verify(voteRepository).findByVotingSessionAndUserId(votingSession, userId);
+        assertThat(response).isEqualTo(Optional.of(optionalVote));
     }
 }

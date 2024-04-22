@@ -58,7 +58,7 @@ public class VoteController {
 
         var voteDomain = voteAdapter.toDomain(voteRequest, votingSession);
 
-        var optionalVote = voteService.getVoteByVotingSessionAndUserId(voteDomain);
+        var optionalVote = voteService.getVoteByVotingSessionAndUserId(voteDomain.getVotingSession(), voteDomain.getUserId());
 
         userVoteValidator.validateUserVote(optionalVote);
 

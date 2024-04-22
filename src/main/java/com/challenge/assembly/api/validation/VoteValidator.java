@@ -2,10 +2,7 @@ package com.challenge.assembly.api.validation;
 
 import com.challenge.assembly.api.dto.VoteRequest;
 import com.challenge.assembly.api.exception.BadRequestException;
-import com.challenge.assembly.api.exception.ConflictException;
 import org.springframework.stereotype.Component;
-
-import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
 
 @Component
 public class VoteValidator {
