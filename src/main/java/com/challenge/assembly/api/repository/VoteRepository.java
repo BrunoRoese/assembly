@@ -1,6 +1,7 @@
 package com.challenge.assembly.api.repository;
 
 import com.challenge.assembly.api.domain.Vote;
+import com.challenge.assembly.api.domain.VoteStatus;
 import com.challenge.assembly.api.domain.VotingSession;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,5 +14,8 @@ import java.util.UUID;
 public interface VoteRepository extends CrudRepository<Vote, UUID> {
 
     @Query
-    public Optional<Vote> findByVotingSessionAndUserId(VotingSession votingSession, UUID userId);
+    Optional<Vote> findByVotingSessionAndUserId(VotingSession votingSession, UUID userId);
+
+    @Query
+    Integer countByVotingSessionIdAndStatus(UUID votingSessionId, VoteStatus voteStatus);
 }
