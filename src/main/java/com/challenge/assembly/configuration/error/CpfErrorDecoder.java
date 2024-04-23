@@ -1,4 +1,4 @@
-package com.challenge.assembly.api.configuration;
+package com.challenge.assembly.configuration.error;
 
 import com.challenge.assembly.api.exception.BadRequestException;
 import feign.Response;

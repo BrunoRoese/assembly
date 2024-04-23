@@ -18,6 +18,15 @@ The database is a simple PostgresSQL database with three tables (these can be fo
 - voting_session
 - vote
 
+![Database diagram](./file/database-diagram.png)
+
+## AWS
+This project is deployed on AWS using CDK, AWS fargate, AWS ECS, and AWS RDS. The project is available [here](http://Assemb-assem-hh0W57HyCOqx-1476110986.sa-east-1.elb.amazonaws.com/actuator/health).
+
+A new DNS for the project was not configured due to pricing as well as the TSL/SSL certificate for HTTPS requests.
+
+The cloud development is only for demonstration purpose and should not be used in production.
+
 ## How to run locally
 First of all, this project is written using Java version 21. Please, make sure you're using the correct java version.
 ```

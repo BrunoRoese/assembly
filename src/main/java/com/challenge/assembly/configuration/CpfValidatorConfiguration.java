@@ -1,5 +1,6 @@
-package com.challenge.assembly.api.configuration;
+package com.challenge.assembly.configuration;
 
+import com.challenge.assembly.configuration.error.CpfErrorDecoder;
 import feign.Logger;
 import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;

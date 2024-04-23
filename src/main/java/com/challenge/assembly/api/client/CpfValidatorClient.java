@@ -1,6 +1,6 @@
 package com.challenge.assembly.api.client;
 
-import com.challenge.assembly.api.configuration.CpfValidatorConfiguration;
+import com.challenge.assembly.configuration.CpfValidatorConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
