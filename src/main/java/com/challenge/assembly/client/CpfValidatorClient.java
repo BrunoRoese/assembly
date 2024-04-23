@@ -1,4 +1,4 @@
-package com.challenge.assembly.api.client;
+package com.challenge.assembly.client;
 
 import com.challenge.assembly.configuration.CpfValidatorConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
