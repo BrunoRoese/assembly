@@ -5,6 +5,8 @@ import com.challenge.assembly.api.domain.Issue;
 import com.challenge.assembly.api.dto.IssueRequest;
 import com.challenge.assembly.api.service.IssueService;
 import com.challenge.assembly.api.validation.IssueRequestValidator;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,9 @@ public class IssueController {
         return issueService.getIssues(page, size);
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Invalid request body")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Issue createIssue(@RequestBody IssueRequest issueRequest) {

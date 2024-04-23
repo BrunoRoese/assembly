@@ -2,6 +2,7 @@ package com.challenge.assembly.validation;
 
 import com.challenge.assembly.api.dto.VotingSessionRequest;
 import com.challenge.assembly.api.exception.BadRequestException;
+import com.challenge.assembly.api.exception.ConflictException;
 import com.challenge.assembly.api.validation.VotingSessionCreationValidator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -35,14 +36,14 @@ public class VotingSessionCreationValidatorTest {
         }
 
         @Test
-        void shouldThrowBadRequestOnExpirationTimeBeforeCurrentDate() {
+        void shouldThrowConflictOnExpirationTimeBeforeCurrentDate() {
             var issueId = "123e4567-e89b-12d3-a456-426614174000";
             var votingSessionRequest = mock(VotingSessionRequest.class);
             var yesterday = LocalDateTime.now().minusDays(1);
 
             given(votingSessionRequest.expirationTime()).willReturn(yesterday);
 
-            assertThrows(BadRequestException.class, () -> votingSessionCreationValidator.validateIssueId(issueId, votingSessionRequest));
+            assertThrows(ConflictException.class, () -> votingSessionCreationValidator.validateIssueId(issueId, votingSessionRequest));
         }
     }
 

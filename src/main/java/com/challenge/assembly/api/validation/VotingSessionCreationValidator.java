@@ -2,6 +2,7 @@ package com.challenge.assembly.api.validation;
 
 import com.challenge.assembly.api.dto.VotingSessionRequest;
 import com.challenge.assembly.api.exception.BadRequestException;
+import com.challenge.assembly.api.exception.ConflictException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,7 @@ public class VotingSessionCreationValidator {
         }
 
         if (votingSessionRequest.expirationTime().isBefore(LocalDateTime.now())) {
-            throw new BadRequestException("Expiration time must be in the future");
+            throw new ConflictException("Expiration time must be in the future");
         }
     }
 }

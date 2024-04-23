@@ -8,8 +8,11 @@ import com.challenge.assembly.api.service.IssueService;
 import com.challenge.assembly.api.service.VotingSessionExpirationTimeService;
 import com.challenge.assembly.api.service.VotingSessionService;
 import com.challenge.assembly.api.validation.VotingSessionCreationValidator;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
@@ -31,6 +34,11 @@ public class VotingSessionController {
         return votingSessionService.pageVotingSessions(page, size).map(votingSessionAdapter::toResponse);
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Invalid issue id"),
+            @ApiResponse(responseCode = "409", description = "Voting session has expired")
+    })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public VotingSessionResponse createVotingSession(
             @RequestParam(value = "issueId") String issueId,

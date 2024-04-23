@@ -9,9 +9,12 @@ import com.challenge.assembly.api.service.VotingSessionService;
 import com.challenge.assembly.api.validation.UserVoteValidator;
 import com.challenge.assembly.api.validation.VoteValidator;
 import com.challenge.assembly.api.validation.VotingSessionExpirationValidator;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import static com.challenge.assembly.api.mapper.UuidMapper.mapStringToUuid;
@@ -28,6 +31,11 @@ public class VoteController {
     private final VotingSessionExpirationValidator votingSessionExpirationValidator;
     private final UserVoteValidator userVoteValidator;
 
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "400", description = "Invalid voting session id")
+            }
+    )
     @GetMapping
     public Page<VoteResponse> getVotesBySession(
             @RequestParam(name = "votingSessionId") String votingSessionId,
@@ -48,6 +56,13 @@ public class VoteController {
         }
     }
 
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "400", description = "Invalid vote request"),
+                    @ApiResponse(responseCode = "409", description = "Voting session expired or user already voted"),
+            }
+    )
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public VoteResponse vote(@RequestBody VoteRequest voteRequest) {
         voteValidator.validateVoteRequest(voteRequest);
