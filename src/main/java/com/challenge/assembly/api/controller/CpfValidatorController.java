@@ -1,6 +1,6 @@
 package com.challenge.assembly.api.controller;
 
-import com.challenge.assembly.client.CpfValidatorClient;
+import com.challenge.assembly.cpfclient.CpfValidatorClient;
 import com.challenge.assembly.api.exception.BadRequestException;
 import com.challenge.assembly.api.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
