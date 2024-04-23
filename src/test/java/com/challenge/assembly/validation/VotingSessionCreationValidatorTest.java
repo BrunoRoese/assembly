@@ -3,7 +3,6 @@ package com.challenge.assembly.validation;
 import com.challenge.assembly.api.dto.VotingSessionRequest;
 import com.challenge.assembly.api.exception.BadRequestException;
 import com.challenge.assembly.api.validation.VotingSessionCreationValidator;
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,9 +11,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
