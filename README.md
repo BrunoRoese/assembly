@@ -50,6 +50,13 @@ After running the docker compose file, you can run the project using the followi
 $ SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
 ```
 
+### Swagger API
+
+After running the project, you can access the swagger API on the following URL:
+```
+http://localhost:8080/swagger-ui.html
+```
+
 ### Testing
 This project uses JUnit 5 for testing. You can run the tests using the following command:
 ```
