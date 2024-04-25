@@ -44,7 +44,7 @@ export class AssemblyStack extends cdk.Stack {
 
     const autoScaling = assemblyApp.service.autoScaleTaskCount({
         minCapacity: 1,
-        maxCapacity: 2,
+        maxCapacity: 1,
     });
 
     autoScaling.scaleOnCpuUtilization('cpu-scaling', {

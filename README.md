@@ -21,7 +21,9 @@ The database is a simple PostgresSQL database with three tables (these can be fo
 ![Database diagram](./file/database-diagram.png)
 
 ## AWS
-This project is deployed on AWS using CDK, AWS fargate, AWS ECS, and AWS RDS. The project is available [here](http://Assemb-assem-hh0W57HyCOqx-1476110986.sa-east-1.elb.amazonaws.com/actuator/health).
+This project is deployed on AWS using CDK, AWS fargate, AWS ECS, and AWS RDS. The project is available [here](http://Assemb-assem-hh0W57HyCOqx-1476110986.sa-east-1.elb.amazonaws.com/actuator/health). -> Deprecated because of costs.
+
+For test in the cloud, use this new [URL](http://ec2-52-67-117-165.sa-east-1.compute.amazonaws.com/actuator/health)
 
 A new DNS for the project was not configured due to pricing as well as the TSL/SSL certificate for HTTPS requests.
 
